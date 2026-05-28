@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Andrés">
+    <title>Convenciones en Python: PEP 8</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="progress-bar"></div>
+    
+    <nav class="navbar">
+        <div class="logo">PEP 8 <span>Guide</span></div>
+        <ul class="nav-links">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#pep8">¿Qué es PEP 8?</a></li>
+            <li><a href="#snake-case">snake_case</a></li>
+            <li><a href="#pascal-case">PascalCase</a></li>
+            <li><a href="#java-vs-python">Java vs Python</a></li>
+            <li><a href="#simulador">Simulador</a></li>
+        </ul>
+    </nav>
+
+    <header id="inicio" class="hero section">
+        <div class="hero-content reveal">
+            <h1 class="typing-text">Convenciones en Python y el estándar PEP 8</h1>
+            <p>Por qué el código limpio es más que solo estética.</p>
+            <p>Andrés Felipe Riaño Barrera</p>
+            <p>Michel Olaya Doncel</p>
+            <p>Katherine Franco Rojas</p>
+            <a href="#pep8" class="btn">Comenzar Exposición</a>
+        </div>
+    </header>
+
+    <section id="pep8" class="section">
+        <h2 class="reveal">¿Qué es PEP 8?</h2>
+        <div class="content-grid">
+            <div class="card reveal">
+                <h3>La Guía de Estilo Oficial</h3>
+                <p>PEP 8 es el documento que proporciona las convenciones para escribir código Python. Su objetivo principal es mejorar la legibilidad y consistencia del código.</p>
+            </div>
+            <div class="card interactive-question reveal">
+                <h3>¿Qué herramientas verifican PEP 8?</h3>
+                <p>En entornos profesionales, no lo revisamos a mano. Usamos linters y formateadores como:</p>
+                <ul>
+                    <li><span class="highlight">Flake8</span>: Analiza la sintaxis y estilo.</li>
+                    <li><span class="highlight">Black</span>: Formateador automático (opinionated).</li>
+                    <li><span class="highlight">Pylint</span>: Análisis profundo de calidad de código.</li>
+                </ul>
+            </div>
+            <div class="card interactive-question reveal">
+                <h3>¿Cómo afecta PEP 8 a librerías externas?</h3>
+                <p>Si usas una librería de terceros que usa otro estilo (ej. camelCase), debes mantener la convención de esa librería cuando interactúas con ella, pero usar PEP 8 estrictamente en tu lógica interna para mantener la coherencia de tu proyecto.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="snake-case" class="section">
+        <h2 class="reveal">Variables y Funciones: <span>snake_case</span></h2>
+        <div class="content-wrapper reveal">
+            <div class="text-content">
+                <p>En Python, los nombres de funciones y variables deben ser en minúsculas, con las palabras separadas por guiones bajos para mejorar la legibilidad.</p>
+                
+                <div class="interactive-question mt-2">
+                    <h3>¿Por qué snake_case y no camelCase?</h3>
+                    <p>Python fue diseñado para ser altamente legible. Estudios en tipografía sugieren que el espacio (representado por el guion bajo) permite que el ojo humano identifique las palabras más rápido que el cambio de mayúsculas (camelCase), especialmente en variables largas. Además, hereda esta filosofía de C, el lenguaje en el que está implementado (CPython).</p>
+                </div>
+            </div>
+            <div class="code-editor">
+                <div class="editor-header">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                    <span class="filename">main.py</span>
+                </div>
+                <pre><code><span class="keyword">def</span> <span class="function">calcular_total</span>(precio_base, impuestos):
+    <span class="comment"># Función usando snake_case</span>
+    total_final = precio_base + impuestos
+    <span class="keyword">return</span> total_final</code></pre>
+            </div>
+        </div>
+    </section>
+
+    <section id="pascal-case" class="section">
+        <h2 class="reveal">Clases: <span>PascalCase</span></h2>
+        <div class="content-wrapper reveal">
+            <div class="text-content">
+                <p>El estándar dicta que los nombres de las clases deben usar UpperCamelCase (también conocido como PascalCase).</p>
+                
+                <div class="interactive-question mt-2">
+                    <h3>¿En qué casos se usa y por qué?</h3>
+                    <p>Se utiliza exclusivamente para la declaración de Clases (y tipos). La razón fundamental es la diferenciación visual: al ver una palabra que empieza con mayúscula en el código, el desarrollador sabe instantáneamente que se trata de un molde (Clase) y no de una instancia, variable o función. Previene colisiones de nombres.</p>
+                </div>
+            </div>
+            <div class="code-editor">
+                <div class="editor-header">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                    <span class="filename">models.py</span>
+                </div>
+                <pre><code><span class="keyword">class</span> <span class="class-name">UsuarioPremium</span>:
+    <span class="keyword">def</span> <span class="function">__init__</span>(self, nombre_usuario):
+        self.nombre_usuario = nombre_usuario
+        self.es_activo = <span class="keyword">True</span></code></pre>
+            </div>
+        </div>
+    </section>
+
+    <section id="constantes" class="section">
+        <h2 class="reveal">Constantes: <span>SCREAMING_SNAKE_CASE</span></h2>
+        <div class="content-wrapper reveal">
+            <p>Python no tiene verdaderas constantes a nivel de sistema. Se usa la convención de escribir la variable completamente en mayúsculas para indicar a otros programadores que ese valor no debe ser modificado.</p>
+            <div class="code-editor mt-2">
+                <pre><code><span class="comment"># Esto es un aviso visual, no un bloqueo del sistema</span>
+<span class="variable-constant">MAX_INTENTOS</span> = <span class="number">3</span>
+<span class="variable-constant">API_KEY</span> = <span class="string">"xyz_12345"</span></code></pre>
+            </div>
+        </div>
+    </section>
+
+    <section id="comparador" class="section">
+        <h2 class="reveal">Comparador Visual Moderno</h2>
+        <div class="cards-container reveal">
+            <div class="style-card">
+                <div class="card-header">snake_case</div>
+                <div class="card-body">
+                    <div class="code-example"><span class="function">calcular_total</span>()</div>
+                    <p>Uso en Python: <strong>Funciones y Variables</strong></p>
+                </div>
+            </div>
+            <div class="style-card">
+                <div class="card-header">PascalCase</div>
+                <div class="card-body">
+                    <div class="code-example"><span class="class-name">UsuarioPremium</span></div>
+                    <p>Uso en Python: <strong>Clases</strong></p>
+                </div>
+            </div>
+            <div class="style-card java-card">
+                <div class="card-header">camelCase</div>
+                <div class="card-body">
+                    <div class="code-example"><span class="function">calcularTotal</span>()</div>
+                    <p>Uso en Python: <strong>No recomendado</strong> (Común en Java/JS)</p>
+                </div>
+            </div>
+            <div class="style-card constant-card">
+                <div class="card-header">SCREAMING_SNAKE_CASE</div>
+                <div class="card-body">
+                    <div class="code-example"><span class="variable-constant">MAX_USERS</span></div>
+                    <p>Uso en Python: <strong>Constantes</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="java-vs-python" class="section">
+        <h2 class="reveal">Comparación de Ecosistemas: Python vs Java</h2>
+        <div class="comparison-table reveal">
+            <div class="col python-col">
+                <div class="col-header">Python (PEP 8)</div>
+                <div class="col-item">Clase: <code>UsuarioPremium</code></div>
+                <div class="col-item">Función: <code>calcular_total()</code></div>
+                <div class="col-item">Constante: <code>MAX_USERS</code></div>
+                <div class="col-item">Variable: <code>precio_base</code></div>
+            </div>
+            <div class="col java-col">
+                <div class="col-header">Java (Convención)</div>
+                <div class="col-item">Clase: <code>UsuarioPremium</code></div>
+                <div class="col-item">Función: <code>calcularTotal()</code></div>
+                <div class="col-item">Constante: <code>MAX_USERS</code></div>
+                <div class="col-item">Variable: <code>precioBase</code></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="simulador" class="section">
+        <h2 class="reveal">Simulador Interactivo PEP 8</h2>
+        <p class="reveal">Escribe un nombre de variable, clase o función para validar su cumplimiento.</p>
+        
+        <div class="simulator-tool reveal">
+            <input type="text" id="sim-input" placeholder="Ej: miFuncion, MiClase, max_users..." autocomplete="off">
+            <div id="sim-result" class="result-box">
+                <p>Esperando entrada...</p>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
